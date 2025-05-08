@@ -1,12 +1,16 @@
-import React, { type FC } from 'react'
+import { type FC } from 'react'
 import { useInvoiceContext } from '../context/InvoiceContext'
 import { Invoice } from '../components/Invoice'
 import type { InvoiceProps } from '../components/Invoice'
+import AddNewInvoice from '../components/addNewInvoice'
 
 export const Invoices: FC = () => {
     const {invoices} : {invoices: InvoiceProps[]} = useInvoiceContext()
-  return (
-    <table>
+  return (<div id='invoices-container'>
+  <h1>Invoice Manager</h1>
+  <h3>Manage your invoices!</h3>
+  <AddNewInvoice/>
+    <table id='invoices-list'>
       <thead>
         <tr>
           <th>ID</th>
@@ -21,5 +25,6 @@ export const Invoices: FC = () => {
           ))}
       </tbody>
     </table>
+    </div>
   )
 }

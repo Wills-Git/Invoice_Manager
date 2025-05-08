@@ -4,6 +4,7 @@ import { type InvoiceProps } from '../components/Invoice';
 type InvoiceContextType = {
   invoices: InvoiceProps[];
   addInvoice: (invoice: InvoiceProps) => void;
+  updateInvoice: (updatedInvoice: InvoiceProps) => void;
 };
 
 const InvoiceContext = createContext<InvoiceContextType | undefined>(undefined);
@@ -22,13 +23,24 @@ type InvoiceProviderProps = {
   
 export const InvoiceProvider: FC<InvoiceProviderProps> = ({ children }) => {
 const [invoices, setInvoices] = useState<InvoiceProps[]>([]);
+const [nextId, setNextId] = useState<number>(1);
 
 const addInvoice = (invoice: InvoiceProps) => {
-    setInvoices((prevInvoices) => [...prevInvoices, invoice]);
+    const newInvoice = {...invoice, id: nextId.toString()};
+    setInvoices((prevInvoices) => [...prevInvoices, newInvoice]);
+      setNextId(nextId + 1); //temp solution
 };
 
+const updateInvoice = (updatedInvoice: InvoiceProps) => {
+    setInvoices((prevInvoices) =>
+      prevInvoices.map((invoice) =>
+        invoice.id === updatedInvoice.id ? updatedInvoice : invoice
+      )
+    );
+  };
+
 return (
-    <InvoiceContext.Provider value={{ invoices, addInvoice }}>
+    <InvoiceContext.Provider value={{ invoices, addInvoice, updateInvoice }}>
     {children}
     </InvoiceContext.Provider>
 );

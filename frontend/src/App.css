@@ -1,3 +1,17 @@
+
+
+#invoices-container {
+  flex: auto;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+#invoices-list{
+  flex: auto;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -17,6 +31,7 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+
 
 @keyframes logo-spin {
   from {
